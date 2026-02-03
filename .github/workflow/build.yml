@@ -1,0 +1,30 @@
+name: Build Rust for Python
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - uses: dtolnay/rust-toolchain@stable
+
+    - name: Install maturin
+      run: pip install maturin
+
+    - name: Build module
+      run: maturin build --release
+
+    - name: Upload wheel
+      uses: actions/upload-artifact@v3
+      with:
+        name: rust_updater
+        path: target/wheels/*.whl

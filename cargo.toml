@@ -1,0 +1,13 @@
+[package]
+name = "rust_updater"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "rust_updater"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3 = { version = "0.20", features = ["extension-module"] }
+reqwest = { version = "0.11", features = ["blocking", "json"] }
+serde_json = "1.0"
